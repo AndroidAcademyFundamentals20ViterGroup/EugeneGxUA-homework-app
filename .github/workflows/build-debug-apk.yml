@@ -2,9 +2,9 @@ name: Andorid Academy fundamentals 2020 Viter group - build debug apk
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, movie_detail ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, movie_detail ]
 
 jobs:
   build:
