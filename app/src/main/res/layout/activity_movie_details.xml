@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:overScrollMode="never">
+    android:overScrollMode="never"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -75,7 +76,8 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
+            android:fontFamily="sans-serif-black"/>
 
         <TextView
             android:id="@+id/tv_title"
@@ -86,13 +88,13 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_age_rate"
-            tools:text="Avangers:\nEnd Game" />
+            tools:text="Avangers:\nEnd Game"/>
 
         <TextView
             android:id="@+id/tv_genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#FF3466"
+            android:textColor="@color/color_secondary"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -123,7 +125,8 @@
             app:layout_constraintBottom_toBottomOf="@id/rb_rating"
             app:layout_constraintStart_toEndOf="@id/rb_rating"
             app:layout_constraintTop_toTopOf="@id/rb_rating"
-            tools:text="127 review" />
+            tools:text="127 review"
+            android:fontFamily="sans-serif-black"/>
 
         <TextView
             android:id="@+id/tv_storyline"
@@ -131,23 +134,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin_padding"
             android:text="@string/storyline"
-            android:textColor="@android:color/white"
+            android:textColor="@color/title_white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_reviews"
-            tools:text="Storyline" />
+            tools:text="Storyline"
+            android:fontFamily="sans-serif-medium"/>
 
         <TextView
             android:id="@+id/tv_storyline_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin_padding"
-            android:textColor="@color/gray"
+            android:textColor="#BFFFFFFF"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_storyline"
+            android:textSize="14sp"
             tools:text="After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe." />
 
         <TextView
@@ -156,11 +162,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin_padding"
             android:text="@string/cast"
-            android:textColor="@android:color/white"
+            android:textColor="@color/title_white"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_storyline_description"
-            tools:text="Cast" />
+            tools:text="Cast"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"/>
 
         <ImageView
             android:id="@+id/iv_cast_1"
@@ -168,6 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin_padding"
             android:src="@mipmap/rdj"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintEnd_toStartOf="@id/iv_cast_2"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/tv_cast" />

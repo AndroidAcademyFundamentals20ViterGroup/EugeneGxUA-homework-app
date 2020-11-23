@@ -3,26 +3,36 @@
     <style name="Theme.AndroidFundamentals" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/screen_bg</item>
-        <item name="colorPrimaryVariant">@color/screen_bg</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorAccent">@color/color_accent</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/color_accent</item>
-        <item name="colorSecondaryVariant">@color/color_accent</item>
-        <item name="colorOnSecondary">@color/gray</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_700</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!-- Background color -->
+        <item name="background">@color/screen_bg</item>
+        <item name="colorOnBackground">@color/white</item>
+
+        <item name="colorError">@android:color/holo_red_dark</item>
+        <item name="colorOnError">@android:color/white</item>
     </style>
 
     <style name="MovieRating" parent="android:Widget.Material.RatingBar.Small">
-        <item name="android:progressBackgroundTint">@android:color/white</item>
+        <item name="android:progressTint">@color/color_secondary</item>
+        <item name="android:progressBackgroundTint">@color/gray</item>
+        <item name="android:secondaryProgress">@android:color/holo_red_dark</item>
+        <item name="colorControlNormal">@android:color/holo_red_dark</item>
+        <item name="colorControlActivated">@android:color/holo_red_dark</item>
     </style>
 
     <style name="MovieTitle" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/title_white</item>
         <item name="android:textSize">40sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif-black</item>
     </style>
 
     <style name="Cast" parent="TextAppearance.AppCompat">

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.tvStart.setOnClickListener {
+        binding.btnMovieDetails.setOnClickListener {
             startActivity(MovieDetailsActivity.getIntent(this))
         }
     }

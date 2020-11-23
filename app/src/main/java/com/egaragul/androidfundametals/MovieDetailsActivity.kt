@@ -37,8 +37,6 @@ class MovieDetailsActivity : AppCompatActivity() {
         binding.tvStorylineDescription.text = getString(R.string.avengers_description)
         binding.tvReviews.text = getString(R.string.avengers_reviews)
 
-        binding.rbRating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-            //TODO
-        }
+
     }
 }
