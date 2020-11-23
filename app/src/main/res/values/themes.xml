@@ -23,10 +23,7 @@
 
     <style name="MovieRating" parent="android:Widget.Material.RatingBar.Small">
         <item name="android:progressTint">@color/color_secondary</item>
-        <item name="android:progressBackgroundTint">@color/gray</item>
-        <item name="android:secondaryProgress">@android:color/holo_red_dark</item>
-        <item name="colorControlNormal">@android:color/holo_red_dark</item>
-        <item name="colorControlActivated">@android:color/holo_red_dark</item>
+        <item name="android:progressBackgroundTint">@color/gray_light</item>
     </style>
 
     <style name="MovieTitle" parent="TextAppearance.AppCompat">
