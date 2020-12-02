@@ -2,9 +2,12 @@ package com.egaragul.androidfundametals
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.egaragul.androidfundametals.ui.click_listeners.MovieDetailsClickListener
 import com.egaragul.androidfundametals.databinding.ActivityMainBinding
+import com.egaragul.androidfundametals.ui.FragmentMoviesList
+import com.egaragul.androidfundametals.ui.details.FragmentMoviesDetails
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MovieDetailsClickListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -14,8 +17,28 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.btnMovieDetails.setOnClickListener {
-            startActivity(MovieDetailsActivity.getIntent(this))
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.fragmentContainer, FragmentMoviesList.newInstance())
+                    .commit()
         }
+
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.size > 1) {
+            val lastFragment = supportFragmentManager.fragments.last()
+            supportFragmentManager.beginTransaction()
+                    .remove(lastFragment)
+                    .commit()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onMovieItemClick(id: Int) {
+        supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, FragmentMoviesDetails.newInstance(id))
+                .commitAllowingStateLoss()
     }
 }
