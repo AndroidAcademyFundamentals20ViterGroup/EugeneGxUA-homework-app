@@ -2,10 +2,10 @@ package com.egaragul.androidfundametals
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.egaragul.androidfundametals.ui.click_listeners.MovieDetailsClickListener
+import com.egaragul.androidfundametals.ui.movies.click_listeners.MovieDetailsClickListener
 import com.egaragul.androidfundametals.databinding.ActivityMainBinding
-import com.egaragul.androidfundametals.ui.FragmentMoviesList
-import com.egaragul.androidfundametals.ui.details.FragmentMoviesDetails
+import com.egaragul.androidfundametals.ui.movies.FragmentMoviesList
+import com.egaragul.androidfundametals.ui.movies.details.FragmentMoviesDetails
 
 class MainActivity : AppCompatActivity(), MovieDetailsClickListener {
 

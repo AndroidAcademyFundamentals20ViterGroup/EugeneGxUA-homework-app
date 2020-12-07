@@ -1,4 +1,4 @@
-package com.egaragul.androidfundametals.ui.details
+package com.egaragul.androidfundametals.ui.movies.details
 
 import android.os.Bundle
 import android.view.LayoutInflater

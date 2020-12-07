@@ -3,7 +3,10 @@
     android:layout_width="170dp"
     android:layout_height="296dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_item_movie_round_corners_8_with_border">
+    android:background="@drawable/bg_item_movie_round_corners_8_with_border"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginStart="@dimen/small_margin_padding">
 
     <ImageView
         android:id="@+id/movie_cover_iv"
@@ -40,6 +43,7 @@
         />
 
     <ImageView
+        android:id="@+id/iv_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
