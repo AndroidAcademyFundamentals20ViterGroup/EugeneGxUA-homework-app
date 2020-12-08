@@ -1,21 +1,30 @@
 package com.egaragul.androidfundametals.ui.movies.details
 
+import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.egaragul.androidfundametals.R
 import com.egaragul.androidfundametals.databinding.FragmentMoviesDetailsBinding
+import com.egaragul.androidfundametals.ui.movies.data.Actor
+import com.egaragul.androidfundametals.ui.movies.data.Movie
+import kotlinx.serialization.json.Json
 
 class FragmentMoviesDetails : Fragment() {
 
     companion object {
-        private const val ARGS_MOVIE_ID = "MOVIE_ID"
+        private const val ARGS_MOVIE = "MOVIE"
 
-        fun newInstance(id : Int) : FragmentMoviesDetails {
+        fun newInstance(movie: Movie) : FragmentMoviesDetails {
             val bundle = Bundle()
-            bundle.putInt(ARGS_MOVIE_ID, id)
+            bundle.putString(ARGS_MOVIE, Json.encodeToString(Movie.serializer(), movie))
 
             val fragment = FragmentMoviesDetails()
             fragment.arguments = bundle
@@ -25,6 +34,16 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private lateinit var binding: FragmentMoviesDetailsBinding
+
+    private var movie: Movie? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.getString(ARGS_MOVIE)?.let {
+            movie = Json.decodeFromString(Movie.serializer(), it)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMoviesDetailsBinding.inflate(layoutInflater, container, false)
@@ -42,10 +61,40 @@ class FragmentMoviesDetails : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        binding.tvAgeRate.text = getString(R.string.age_rate)
-        binding.tvTitle.text = getString(R.string.avengers_title)
-        binding.tvGenre.text = getString(R.string.avengers_genre)
-        binding.tvStorylineDescription.text = getString(R.string.avengers_description)
-        binding.tvReviews.text = getString(R.string.avengers_reviews)
+        movie?.apply {
+
+            binding.ivMovieCover.setImageResource(image)
+
+            binding.tvAgeRate.text = ageRate
+            binding.tvTitle.text = title
+            binding.tvGenre.text = genre
+            binding.tvStorylineDescription.text = getString(R.string.avengers_description)
+
+            binding.rbRating.rating = rating.toFloat()
+            val reviewsText = "$reviews reviews"
+            binding.tvReviews.text = reviewsText
+
+            setupActorsList(actors)
+        }
+    }
+
+    private fun setupActorsList(actors : List<Actor>) {
+
+        binding.rvCast?.let {
+            val actorAdapter = ActorsAdapter()
+            val divider = DividerItemDecoration(requireContext(), LinearLayout.HORIZONTAL)
+
+            ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)?.let { drawable ->
+                divider.setDrawable(
+                    drawable
+                )
+            }
+
+            it.addItemDecoration(divider)
+            it.adapter = actorAdapter
+
+            actorAdapter.bindActors(actors)
+            actorAdapter.notifyDataSetChanged()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.egaragul.androidfundametals.ui.movies
+package com.egaragul.androidfundametals.ui.movies.list
 
 import androidx.recyclerview.widget.DiffUtil
 import com.egaragul.androidfundametals.ui.movies.data.Movie

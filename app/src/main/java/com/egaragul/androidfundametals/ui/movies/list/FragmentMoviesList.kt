@@ -1,4 +1,4 @@
-package com.egaragul.androidfundametals.ui.movies
+package com.egaragul.androidfundametals.ui.movies.list
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import com.egaragul.androidfundametals.databinding.FragmentMoviesListBinding
 import com.egaragul.androidfundametals.ui.click_listeners.MovieDetailsClickListener
-import com.egaragul.androidfundametals.ui.movies.data.MockHelper
+import com.egaragul.androidfundametals.utils.MockHelper
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 
 /**
@@ -26,8 +26,8 @@ class FragmentMoviesList : Fragment() {
 
     private var movieDetailsClickListener : MovieDetailsClickListener? = null
 
-    private val moviesAdapter = MoviesAdapter { movieId ->
-        movieDetailsClickListener?.onMovieItemClick(movieId)
+    private val moviesAdapter = MoviesAdapter { movie ->
+        movieDetailsClickListener?.onMovieItemClick(movie)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

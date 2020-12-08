@@ -4,7 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.egaragul.androidfundametals.ui.click_listeners.MovieDetailsClickListener
 import com.egaragul.androidfundametals.databinding.ActivityMainBinding
-import com.egaragul.androidfundametals.ui.movies.FragmentMoviesList
+import com.egaragul.androidfundametals.ui.movies.list.FragmentMoviesList
+import com.egaragul.androidfundametals.ui.movies.data.Movie
 import com.egaragul.androidfundametals.ui.movies.details.FragmentMoviesDetails
 
 class MainActivity : AppCompatActivity(), MovieDetailsClickListener {
@@ -36,9 +37,9 @@ class MainActivity : AppCompatActivity(), MovieDetailsClickListener {
         }
     }
 
-    override fun onMovieItemClick(id: Int) {
+    override fun onMovieItemClick(movie : Movie) {
         supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, FragmentMoviesDetails.newInstance(id))
+                .add(R.id.fragmentContainer, FragmentMoviesDetails.newInstance(movie))
                 .commitAllowingStateLoss()
     }
 }

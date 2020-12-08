@@ -1,10 +1,11 @@
-package com.egaragul.androidfundametals.ui.movies
+package com.egaragul.androidfundametals.ui.movies.list
 
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.egaragul.androidfundametals.R
 import com.egaragul.androidfundametals.databinding.ItemMovieListBinding
+import com.egaragul.androidfundametals.ui.movies.data.Actor
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 
 /**
@@ -13,7 +14,7 @@ import com.egaragul.androidfundametals.ui.movies.data.Movie
  */
 class MovieViewHolder(
         private val itemBinding : ItemMovieListBinding,
-        private val clickListener : ((Int) -> Unit)
+        private val clickListener : ((Movie) -> Unit)
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
     fun bind(movie : Movie) {
@@ -21,6 +22,8 @@ class MovieViewHolder(
         itemBinding.tvAgeRate.text = movie.ageRate
         itemBinding.tvGenre.text = movie.genre
         itemBinding.tvTitle.text = movie.title
+
+        itemBinding.rbRating.setIsIndicator(true)
         itemBinding.rbRating.rating = movie.rating.toFloat()
 
         val reviews = "${movie.reviews} reviews"
@@ -30,7 +33,7 @@ class MovieViewHolder(
         itemBinding.tvMovieLength.text = duration
 
         itemBinding.root.setOnClickListener {
-            clickListener(movie.id)
+            clickListener(movie)
         }
     }
 }

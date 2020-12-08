@@ -1,6 +1,8 @@
-package com.egaragul.androidfundametals.ui.movies.data
+package com.egaragul.androidfundametals.utils
 
 import com.egaragul.androidfundametals.R
+import com.egaragul.androidfundametals.ui.movies.data.Actor
+import com.egaragul.androidfundametals.ui.movies.data.Movie
 
 /**
  * Created by Eugene Garagulya
@@ -20,7 +22,7 @@ object MockHelper {
                 137,
                 R.mipmap.movie,
                 false,
-                emptyList()
+                getActors()
             ),
             Movie(
                 id = 2,
@@ -32,7 +34,7 @@ object MockHelper {
                 97,
                 R.mipmap.tenet,
                 true,
-                emptyList()
+                getActors()
             ),
             Movie(
                 id = 3,
@@ -44,7 +46,7 @@ object MockHelper {
                 102,
                 R.mipmap.widow,
                 false,
-                emptyList()
+                getActors()
             ),
             Movie(
                 id = 4,
@@ -56,10 +58,10 @@ object MockHelper {
                 120,
                 R.mipmap.super_woman,
                 false,
-                emptyList()
+                getActors()
             ),
             Movie(
-                id = 1,
+                id = 5,
                 ageRate = "13+",
                 genre = "Action, Adventure, Drama",
                 4,
@@ -68,10 +70,10 @@ object MockHelper {
                 137,
                 R.mipmap.movie,
                 false,
-                emptyList()
+                getActors()
             ),
             Movie(
-                id = 2,
+                id = 6,
                 ageRate = "16+",
                 genre = "Action, Sci-Fi, Thriller",
                 5,
@@ -80,8 +82,43 @@ object MockHelper {
                 97,
                 R.mipmap.tenet,
                 true,
-                emptyList()
+                getActors()
             ),
+        )
+    }
+
+    fun getActors() : List<Actor> {
+        return listOf(
+            Actor(
+                1,
+                R.mipmap.rdj,
+                "Robert Downey Jr."
+            ),
+            Actor(
+                2,
+                R.mipmap.ce,
+                "Chris Evans"
+            ),
+            Actor(
+                3,
+                R.mipmap.mr,
+                "Mark Rufallo"
+            ),
+            Actor(
+                4,
+                R.mipmap.ch,
+                "Chris Hamsworth"
+            ),
+            Actor(
+                5,
+                R.mipmap.ce,
+                "Chris Evans"
+            ),
+            Actor(
+                6,
+                R.mipmap.mr,
+                "Mark Rufallo"
+            )
         )
     }
 }

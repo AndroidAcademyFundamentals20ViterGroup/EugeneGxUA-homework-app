@@ -1,4 +1,4 @@
-package com.egaragul.androidfundametals.ui.movies
+package com.egaragul.androidfundametals.ui.movies.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.egaragul.androidfundametals.ui.movies.data.Movie
  * Created by Eugene Garagulya
  * Date: 07.12.2020
  */
-class MoviesAdapter(private val clickListener: ((Int) -> Unit)) : RecyclerView.Adapter<MovieViewHolder>() {
+class MoviesAdapter(private val clickListener: ((Movie) -> Unit)) : RecyclerView.Adapter<MovieViewHolder>() {
 
     init {
         setHasStableIds(true)
