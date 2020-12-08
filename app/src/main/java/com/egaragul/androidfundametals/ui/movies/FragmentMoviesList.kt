@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import com.egaragul.androidfundametals.databinding.FragmentMoviesListBinding
-import com.egaragul.androidfundametals.ui.movies.click_listeners.MovieDetailsClickListener
+import com.egaragul.androidfundametals.ui.click_listeners.MovieDetailsClickListener
 import com.egaragul.androidfundametals.ui.movies.data.MockHelper
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 

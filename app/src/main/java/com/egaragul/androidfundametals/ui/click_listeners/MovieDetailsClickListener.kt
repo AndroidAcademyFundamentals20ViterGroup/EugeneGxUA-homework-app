@@ -1,4 +1,4 @@
-package com.egaragul.androidfundametals.ui.movies.click_listeners
+package com.egaragul.androidfundametals.ui.click_listeners
 
 /**
  * Created by Eugene Garagulya

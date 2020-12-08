@@ -29,7 +29,7 @@ class MoviesAdapter(private val clickListener: ((Int) -> Unit)) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layout = ItemMovieListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MovieViewHolder(layout) { clickListener }
+        return MovieViewHolder(layout, clickListener)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
