@@ -8,5 +8,5 @@ import com.egaragul.androidfundametals.ui.movies.data.Movie
  * Date: 02.12.2020
  */
 interface MovieDetailsClickListener {
-    fun onMovieItemClick(movie : Movie)
+    fun onMovieItemClick()
 }

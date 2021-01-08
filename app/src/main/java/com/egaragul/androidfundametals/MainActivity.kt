@@ -20,26 +20,20 @@ class MainActivity : AppCompatActivity(), MovieDetailsClickListener {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .add(R.id.fragmentContainer, FragmentMoviesList.newInstance())
-                    .commit()
+                .add(R.id.fragmentContainer, FragmentMoviesList.newInstance())
+                .commit()
         }
-
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.fragments.size > 1) {
-            val lastFragment = supportFragmentManager.fragments.last()
-            supportFragmentManager.beginTransaction()
-                    .remove(lastFragment)
-                    .commit()
-        } else {
-            super.onBackPressed()
-        }
+        supportFragmentManager.popBackStack()
     }
 
-    override fun onMovieItemClick(movie : Movie) {
+    override fun onMovieItemClick() {
         supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, FragmentMoviesDetails.newInstance(movie))
-                .commitAllowingStateLoss()
+            .add(R.id.fragmentContainer, FragmentMoviesDetails.newInstance())
+            .addToBackStack(FragmentMoviesDetails.TAG)
+            .commit()
+
     }
 }

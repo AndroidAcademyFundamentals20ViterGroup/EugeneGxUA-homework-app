@@ -5,14 +5,19 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import coil.load
 import com.egaragul.androidfundametals.R
 import com.egaragul.androidfundametals.databinding.FragmentMoviesDetailsBinding
+import com.egaragul.androidfundametals.ui.movies.MoviesViewModel
 import com.egaragul.androidfundametals.ui.movies.data.Actor
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 import kotlinx.serialization.json.Json
@@ -20,32 +25,23 @@ import kotlinx.serialization.json.Json
 class FragmentMoviesDetails : Fragment() {
 
     companion object {
-        private const val ARGS_MOVIE = "MOVIE"
 
-        fun newInstance(movie: Movie) : FragmentMoviesDetails {
-            val bundle = Bundle()
-            bundle.putString(ARGS_MOVIE, Json.encodeToString(Movie.serializer(), movie))
+        const val TAG = "FragmentMoviesDetails"
 
-            val fragment = FragmentMoviesDetails()
-            fragment.arguments = bundle
-
-            return fragment
+        fun newInstance(): FragmentMoviesDetails {
+            return FragmentMoviesDetails()
         }
     }
 
     private lateinit var binding: FragmentMoviesDetailsBinding
 
-    private var movie: Movie? = null
+    private val viewModel: MoviesViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        arguments?.getString(ARGS_MOVIE)?.let {
-            movie = Json.decodeFromString(Movie.serializer(), it)
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentMoviesDetailsBinding.inflate(layoutInflater, container, false)
 
         return binding.root
@@ -61,40 +57,43 @@ class FragmentMoviesDetails : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        movie?.apply {
+        viewModel.selectedMovie.observe(viewLifecycleOwner) {
+            binding.ivMovieCover.load(it.detailImageUrl)
 
-            binding.ivMovieCover.setImageResource(image)
+            binding.tvAgeRate.text = getString(R.string.pg_age_dec, it.pgAge)
+            binding.tvTitle.text = it.title
+            binding.tvGenre.text = it.genres.joinToString { genre -> genre.name }
+            binding.tvStorylineDescription.text = it.title
 
-            binding.tvAgeRate.text = ageRate
-            binding.tvTitle.text = title
-            binding.tvGenre.text = genre
-            binding.tvStorylineDescription.text = getString(R.string.avengers_description)
+            binding.rbRating.rating = it.rating.toFloat() / 2
+            binding.tvReviews.text = getString(R.string.dec_reviews, it.reviewCount)
 
-            binding.rbRating.rating = rating.toFloat()
-            val reviewsText = "$reviews reviews"
-            binding.tvReviews.text = reviewsText
-
-            setupActorsList(actors)
+            if (it.actors.isNotEmpty()) {
+                binding.tvCast.visibility = VISIBLE
+                setupActorsList(it.actors)
+            } else {
+                binding.tvCast.visibility = INVISIBLE
+            }
         }
     }
 
-    private fun setupActorsList(actors : List<Actor>) {
+    private fun setupActorsList(actors: List<Actor>) {
 
-        binding.rvCast?.let {
-            val actorAdapter = ActorsAdapter()
+        binding.rvCast.apply {
             val divider = DividerItemDecoration(requireContext(), LinearLayout.HORIZONTAL)
 
-            ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)?.let { drawable ->
-                divider.setDrawable(
-                    drawable
-                )
+            ContextCompat.getDrawable(requireContext(), R.drawable.divider_drawable)
+                ?.let { drawable ->
+                    divider.setDrawable(
+                        drawable
+                    )
+                }
+
+            addItemDecoration(divider)
+            adapter = ActorsAdapter().also { adapter ->
+                adapter.bindActors(actors)
+                adapter.notifyDataSetChanged()
             }
-
-            it.addItemDecoration(divider)
-            it.adapter = actorAdapter
-
-            actorAdapter.bindActors(actors)
-            actorAdapter.notifyDataSetChanged()
         }
     }
 }
