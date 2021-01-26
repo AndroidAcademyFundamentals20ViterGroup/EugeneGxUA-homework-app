@@ -16,7 +16,7 @@
         android:drawableStart="@drawable/ic_red_target_cross"
         android:drawablePadding="@dimen/small_margin_padding"
         android:fontFamily="sans-serif-black"
-        android:text="Movie list"
+        android:text="@string/movies_popular"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"

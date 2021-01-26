@@ -2,6 +2,7 @@ package com.egaragul.androidfundametals.ui.movies.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.egaragul.androidfundametals.databinding.ItemMovieListBinding
 import com.egaragul.androidfundametals.ui.movies.data.Movie
@@ -18,13 +19,13 @@ class MoviesAdapter(private val clickListener: ((Movie) -> Unit)) : RecyclerView
 
     private val movies = mutableListOf<Movie>()
 
-    fun submitMovies(movies: List<Movie>) {
-        this.movies.clear()
-        this.movies.addAll(movies)
-    }
+    fun submitMovies(input: List<Movie>) {
+        val diffResult = DiffUtil.calculateDiff(MovieDiffUtilCallback(this.movies, input))
 
-    fun getMovies() : List<Movie> {
-        return movies
+        this.movies.clear()
+        this.movies.addAll(input)
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -38,7 +39,5 @@ class MoviesAdapter(private val clickListener: ((Movie) -> Unit)) : RecyclerView
 
     override fun getItemCount(): Int = movies.size
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int) = position.toLong()
 }

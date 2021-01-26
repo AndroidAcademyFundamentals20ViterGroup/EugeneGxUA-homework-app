@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import com.egaragul.androidfundametals.databinding.FragmentMoviesListBinding
 import com.egaragul.androidfundametals.ui.click_listeners.MovieDetailsClickListener
-import com.egaragul.androidfundametals.ui.movies.MoviesViewModel
-import com.egaragul.androidfundametals.ui.movies.data.Movie
+import com.egaragul.androidfundametals.ui.movies.di.MoviesViewModelComponent
 
 /**
  * Created by Eugene Garagulya
@@ -25,7 +21,10 @@ class FragmentMoviesList : Fragment() {
     }
 
     private lateinit var binding : FragmentMoviesListBinding
-    private val viewModel : MoviesViewModel by activityViewModels()
+//    private val viewModel : MoviesViewModel by activityViewModels()
+    private val viewModel by lazy {
+        MoviesViewModelComponent().provideMoviesViewModel(requireActivity())
+    }
 
     private var movieDetailsClickListener : MovieDetailsClickListener? = null
 
@@ -50,17 +49,9 @@ class FragmentMoviesList : Fragment() {
 
         viewModel.movieList.observe(viewLifecycleOwner) { movies ->
             moviesAdapter.submitMovies(movies)
-            moviesAdapter.notifyDataSetChanged()
         }
 
-        viewModel.getMoviesForAdapter(requireContext())
-    }
-
-    private fun updateMovies(list : List<Movie>) {
-        val oldList = moviesAdapter.getMovies()
-
-        moviesAdapter.submitMovies(list)
-        DiffUtil.calculateDiff(MovieDiffUtilCallback(oldList, list)).dispatchUpdatesTo(moviesAdapter)
+        viewModel.getMoviesForAdapter()
     }
 
     override fun onAttach(context: Context) {

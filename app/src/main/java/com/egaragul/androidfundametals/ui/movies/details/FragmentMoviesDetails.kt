@@ -1,7 +1,5 @@
 package com.egaragul.androidfundametals.ui.movies.details
 
-import android.content.res.Resources
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +8,14 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import coil.load
 import com.egaragul.androidfundametals.R
 import com.egaragul.androidfundametals.databinding.FragmentMoviesDetailsBinding
-import com.egaragul.androidfundametals.ui.movies.MoviesViewModel
+import com.egaragul.androidfundametals.ui.movies.viewmodel.MoviesViewModel
 import com.egaragul.androidfundametals.ui.movies.data.Actor
-import com.egaragul.androidfundametals.ui.movies.data.Movie
-import kotlinx.serialization.json.Json
 
 class FragmentMoviesDetails : Fragment() {
 
