@@ -37,7 +37,7 @@ class MovieViewHolder(
         itemBinding.tvReviews.text = context.getString(R.string.dec_reviews, movie.reviewCount)
 
 
-        itemBinding.tvMovieLength.text = context.getString(R.string.dec_movie_duration, movie.runningTime)
+//        itemBinding.tvMovieLength.text = context.getString(R.string.dec_movie_duration, movie.runningTime)
 
         itemBinding.root.setOnClickListener {
             clickListener(movie)

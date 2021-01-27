@@ -38,7 +38,7 @@ object JsonMockFormatter {
 
     internal fun parseGenres(jsonString : String) : List<Genre> {
         val jsonGenre = jsonFormat.decodeFromString<List<JsonGenre>>(jsonString)
-        return jsonGenre.map { jsonGenreItem -> Genre(id = jsonGenreItem.id, name = jsonGenreItem.name) }
+        return jsonGenre.map { jsonGenreItem -> Genre(id = jsonGenreItem.id.toLong(), name = jsonGenreItem.name) }
     }
 
     internal fun parseActors(jsonString: String) : List<Actor> {
