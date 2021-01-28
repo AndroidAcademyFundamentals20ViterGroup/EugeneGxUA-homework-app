@@ -29,7 +29,7 @@ class FragmentMoviesList : Fragment() {
     private var movieDetailsClickListener : MovieDetailsClickListener? = null
 
     private val moviesAdapter = MoviesAdapter { movie ->
-        viewModel.selectedMovie.value = movie
+        viewModel.selectedMovieId.value = movie.id
         movieDetailsClickListener?.onMovieItemClick()
     }
 

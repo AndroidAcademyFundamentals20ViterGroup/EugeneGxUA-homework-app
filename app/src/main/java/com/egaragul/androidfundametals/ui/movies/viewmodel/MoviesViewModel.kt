@@ -4,9 +4,11 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.egaragul.androidfundametals.ui.movies.data.Genre
+import com.egaragul.androidfundametals.ui.movies.data.Images
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 import com.egaragul.androidfundametals.ui.movies.model.MoviesModel
 import com.egaragul.androidfundametals.ui.movies.model.api.ConfigurationResponse
+import com.egaragul.androidfundametals.ui.movies.model.api.GenresResponse
 import com.egaragul.androidfundametals.utils.JsonMockFormatter
 import kotlinx.coroutines.*
 
@@ -24,24 +26,53 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
     val movieList: LiveData<List<Movie>>
         get() = movies
 
-    private val imageConfiguration = MutableLiveData<ConfigurationResponse.Images>()
-    val imageConfig: LiveData<ConfigurationResponse.Images>
-        get() = imageConfiguration
+    val selectedMovieId = MutableLiveData<Int>()
+    val sMovie = MutableLiveData<Movie>()
 
+    private var config: Images? = null
+    private val genres = mutableListOf<GenresResponse.Genre>()
 
-    val selectedMovie = MutableLiveData<Movie>()
+    fun getMovieDetail() {
+        viewModelScope.launch(exceptionHandler) {
+            selectedMovieId.value?.let { id ->
+                val loadedMovie = model.getMovieDetails(id)
 
-    fun getMoviesForAdapter(context: Context) {
-        viewModelScope.launch {
-            movies.postValue(JsonMockFormatter.loadMovies(context))
+                setData {
+                    sMovie.value = Movie(
+                        id = loadedMovie.id ?: -1,
+                        pgAge = if (loadedMovie.adult == true) {
+                            18
+                        } else {
+                            16
+                        },
+                        title = loadedMovie.originalTitle ?: "No title",
+                        genres = loadedMovie.genres?.map { Genre(it.id ?: -1, it.name ?: "") }
+                            ?: emptyList(),
+                        runningTime = 0,
+                        reviewCount = loadedMovie.voteCount ?: 0,
+                        isLiked = false,
+                        rating = loadedMovie.voteAverage?.div(2)?.toInt() ?: 0,
+                        imageUrl = config?.secureBaseUrl + (config?.posterSizes?.get(3)
+                            ?: "" + loadedMovie.backdropPath),
+                        detailImageUrl = config?.secureBaseUrl + (config?.backdropSizes?.get(2)
+                            ?: "") + loadedMovie.backdropPath,
+                        storyLine = loadedMovie.overview ?: "No storyline",
+                        actors = emptyList()
+                    )
+                }
+
+            }
         }
     }
 
     fun getMoviesForAdapter() {
         viewModelScope.launch(exceptionHandler) {
-            val config = withContext(Dispatchers.IO) { model.getConfiguration() }
+            config = withContext(Dispatchers.IO) { model.getConfiguration() }
+
             val moviesList = model.getPopularMovies()
-            val genres = model.getGenres()
+            model.getGenres()?.let {
+                genres.addAll(it)
+            }
 
 
             launch(Dispatchers.Default) {
@@ -74,10 +105,18 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
                             actors = emptyList()
                         )
                     }
-                    launch(Dispatchers.Main) {
+                    setData {
                         movies.value = transformedList
                     }
                 }
+            }
+        }
+    }
+
+    private fun setData(function: () -> Unit) {
+        viewModelScope.launch {
+            launch(Dispatchers.Main) {
+                function()
             }
         }
     }

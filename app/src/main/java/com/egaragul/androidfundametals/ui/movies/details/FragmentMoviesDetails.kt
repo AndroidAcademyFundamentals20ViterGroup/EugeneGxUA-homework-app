@@ -52,13 +52,13 @@ class FragmentMoviesDetails : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        viewModel.selectedMovie.observe(viewLifecycleOwner) {
+        viewModel.sMovie.observe(viewLifecycleOwner) {
             binding.ivMovieCover.load(it.detailImageUrl)
 
             binding.tvAgeRate.text = getString(R.string.pg_age_dec, it.pgAge)
             binding.tvTitle.text = it.title
             binding.tvGenre.text = it.genres.joinToString { genre -> genre.name }
-            binding.tvStorylineDescription.text = it.title
+            binding.tvStorylineDescription.text = it.storyLine
 
             binding.rbRating.rating = it.rating.toFloat() / 2
             binding.tvReviews.text = getString(R.string.dec_reviews, it.reviewCount)
@@ -70,6 +70,8 @@ class FragmentMoviesDetails : Fragment() {
                 binding.tvCast.visibility = INVISIBLE
             }
         }
+
+        viewModel.getMovieDetail()
     }
 
     private fun setupActorsList(actors: List<Actor>) {
