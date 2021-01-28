@@ -78,6 +78,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
             app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
+            android:background="@drawable/bg_dark_gray_round_corners_5"
             android:padding="4dp"/>
 
         <TextView

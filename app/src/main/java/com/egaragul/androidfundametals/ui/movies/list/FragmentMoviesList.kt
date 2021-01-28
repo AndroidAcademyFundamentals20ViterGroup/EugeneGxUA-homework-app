@@ -21,7 +21,6 @@ class FragmentMoviesList : Fragment() {
     }
 
     private lateinit var binding : FragmentMoviesListBinding
-//    private val viewModel : MoviesViewModel by activityViewModels()
     private val viewModel by lazy {
         MoviesViewModelComponent().provideMoviesViewModel(requireActivity())
     }

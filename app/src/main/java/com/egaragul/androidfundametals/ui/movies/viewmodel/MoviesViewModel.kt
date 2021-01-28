@@ -1,6 +1,5 @@
 package com.egaragul.androidfundametals.ui.movies.viewmodel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.egaragul.androidfundametals.ui.movies.data.Actor
@@ -8,9 +7,7 @@ import com.egaragul.androidfundametals.ui.movies.data.Genre
 import com.egaragul.androidfundametals.ui.movies.data.Images
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 import com.egaragul.androidfundametals.ui.movies.model.MoviesModel
-import com.egaragul.androidfundametals.ui.movies.model.api.ConfigurationResponse
 import com.egaragul.androidfundametals.ui.movies.model.api.GenresResponse
-import com.egaragul.androidfundametals.utils.JsonMockFormatter
 import kotlinx.coroutines.*
 
 class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
@@ -36,15 +33,11 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
     fun getMovieDetail() {
         viewModelScope.launch(exceptionHandler) {
             selectedMovieId.value?.let { id ->
-                Log.d("getMovieDetail", "getMovieDetail: loadedMovie")
                 val loadedMovie = model.getMovieDetails(id)
-                Log.d("getMovieDetail", "getMovieDetail: cast")
-
                 val cast = model.getMovieCredits(id)
-                Log.d("getMovieDetail", "getMovieDetail: after cast")
 
-                setData {
-                    sMovie.value = Movie(
+                val movie = async(Dispatchers.Default) {
+                    Movie(
                         id = loadedMovie.id ?: -1,
                         pgAge = if (loadedMovie.adult == true) {
                             18
@@ -76,6 +69,10 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
                             )
                         } ?: emptyList()
                     )
+                }.await()
+
+                setData {
+                    sMovie.value = movie
                 }
 
             }
