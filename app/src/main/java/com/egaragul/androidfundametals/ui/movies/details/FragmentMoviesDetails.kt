@@ -63,7 +63,7 @@ class FragmentMoviesDetails : Fragment() {
             binding.rbRating.rating = it.rating.toFloat() / 2
             binding.tvReviews.text = getString(R.string.dec_reviews, it.reviewCount)
 
-            if (it.actors.isNotEmpty()) {
+            if (!it.actors.isNullOrEmpty()) {
                 binding.tvCast.visibility = VISIBLE
                 setupActorsList(it.actors)
             } else {

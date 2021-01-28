@@ -47,8 +47,8 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
                         title = loadedMovie.originalTitle ?: "No title",
                         genres = loadedMovie.genres?.map {
                             Genre(
-                                it?.id?.toLong() ?: -1,
-                                it?.name ?: ""
+                                it.id ?: -1,
+                                it.name ?: ""
                             )
                         }
                             ?: emptyList(),
@@ -108,15 +108,11 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
                                     name = genreResp.name ?: "No tag"
                                 )
                             } ?: emptyList(),
-                            runningTime = 0,
                             reviewCount = movie.voteCount ?: 0,
                             isLiked = false,
                             rating = movie.voteAverage?.div(2)?.toInt() ?: 0,
                             imageUrl = config?.secureBaseUrl + (config?.posterSizes?.get(3)
-                                ?: "") + movie.posterPath,
-                            detailImageUrl = "",
-                            storyLine = "",
-                            actors = emptyList()
+                                ?: "") + movie.posterPath
                         )
                     }
                     setData {
