@@ -37,6 +37,7 @@ object RetrofitModule {
         .addConverterFactory(Json {
             prettyPrint = true
             ignoreUnknownKeys = true
+            isLenient = true
         }.asConverterFactory("application/json".toMediaType()))
         .build()
 

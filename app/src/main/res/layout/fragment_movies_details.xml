@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/tenet"
+            tools:src="@mipmap/tenet"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -72,12 +72,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
-            android:text="13+"
+            tools:text="13+"
             android:textColor="@android:color/white"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
+            android:padding="4dp"/>
 
         <TextView
             android:id="@+id/tv_title"

@@ -3,6 +3,7 @@ package com.egaragul.androidfundametals.ui.movies.viewmodel
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
+import com.egaragul.androidfundametals.ui.movies.data.Actor
 import com.egaragul.androidfundametals.ui.movies.data.Genre
 import com.egaragul.androidfundametals.ui.movies.data.Images
 import com.egaragul.androidfundametals.ui.movies.data.Movie
@@ -35,7 +36,12 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
     fun getMovieDetail() {
         viewModelScope.launch(exceptionHandler) {
             selectedMovieId.value?.let { id ->
+                Log.d("getMovieDetail", "getMovieDetail: loadedMovie")
                 val loadedMovie = model.getMovieDetails(id)
+                Log.d("getMovieDetail", "getMovieDetail: cast")
+
+                val cast = model.getMovieCredits(id)
+                Log.d("getMovieDetail", "getMovieDetail: after cast")
 
                 setData {
                     sMovie.value = Movie(
@@ -46,7 +52,12 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
                             16
                         },
                         title = loadedMovie.originalTitle ?: "No title",
-                        genres = loadedMovie.genres?.map { Genre(it.id ?: -1, it.name ?: "") }
+                        genres = loadedMovie.genres?.map {
+                            Genre(
+                                it?.id?.toLong() ?: -1,
+                                it?.name ?: ""
+                            )
+                        }
                             ?: emptyList(),
                         runningTime = 0,
                         reviewCount = loadedMovie.voteCount ?: 0,
@@ -57,7 +68,13 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
                         detailImageUrl = config?.secureBaseUrl + (config?.backdropSizes?.get(2)
                             ?: "") + loadedMovie.backdropPath,
                         storyLine = loadedMovie.overview ?: "No storyline",
-                        actors = emptyList()
+                        actors = cast?.map {
+                            Actor(
+                                id = it.id ?: -1,
+                                name = it.name ?: "",
+                                imageUrl = config?.secureBaseUrl + (config?.profileSizes?.get(3)) + it.profilePath,
+                            )
+                        } ?: emptyList()
                     )
                 }
 
