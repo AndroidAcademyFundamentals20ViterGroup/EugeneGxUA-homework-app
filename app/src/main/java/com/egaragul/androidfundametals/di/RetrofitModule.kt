@@ -1,7 +1,6 @@
 package com.egaragul.androidfundametals.di
 
 import com.egaragul.androidfundametals.model.TheMovieDbService
-import com.egaragul.androidfundametals.model.data.BaseGetRequest
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -42,8 +41,4 @@ object RetrofitModule {
         .build()
 
     val apiMovies: TheMovieDbService = retrofit.create(TheMovieDbService::class.java)
-
-    fun proceedApiKeyArgument() : BaseGetRequest{
-        return BaseGetRequest()
-    }
 }
