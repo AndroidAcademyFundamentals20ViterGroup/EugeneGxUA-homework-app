@@ -1,17 +1,12 @@
 package com.egaragul.androidfundametals.ui.movies.model.api
 
+import com.egaragul.androidfundametals.ui.movies.data.Genre
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GenresResponse(
+class GenresResponse(
 	val genres: List<Genre>? = null
-) {
-	@Serializable
-	data class Genre(
-		val name: String? = null,
-		val id: Long? = null
-	)
-}
+)
 
 
 

@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ConfigurationResponse(
+class ConfigurationResponse(
 
 	@SerialName("images")
 	val images: Images? = null,

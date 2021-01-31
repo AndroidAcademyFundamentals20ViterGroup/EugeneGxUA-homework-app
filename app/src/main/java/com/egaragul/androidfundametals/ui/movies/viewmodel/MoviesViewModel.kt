@@ -7,7 +7,6 @@ import com.egaragul.androidfundametals.ui.movies.data.Genre
 import com.egaragul.androidfundametals.ui.movies.data.Images
 import com.egaragul.androidfundametals.ui.movies.data.Movie
 import com.egaragul.androidfundametals.ui.movies.model.MoviesModel
-import com.egaragul.androidfundametals.ui.movies.model.api.GenresResponse
 import kotlinx.coroutines.*
 
 class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
@@ -28,13 +27,13 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
     val sMovie = MutableLiveData<Movie>()
 
     private var config: Images? = null
-    private val genres = mutableListOf<GenresResponse.Genre>()
+    private val genres = mutableListOf<Genre>()
 
     fun getMovieDetail() {
         viewModelScope.launch(exceptionHandler) {
             selectedMovieId.value?.let { id ->
-                val loadedMovie = model.getMovieDetails(id)
-                val cast = model.getMovieCredits(id)
+                val loadedMovie = model.getMovieDetailsAsync(id)
+                val cast = model.getMovieCreditsAsync(id)
 
                 val movie = async(Dispatchers.Default) {
                     Movie(
@@ -81,10 +80,10 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
 
     fun getMoviesForAdapter() {
         viewModelScope.launch(exceptionHandler) {
-            config = withContext(Dispatchers.IO) { model.getConfiguration() }
+            config = withContext(Dispatchers.IO) { model.getConfigurationAsync() }
 
-            val moviesList = model.getPopularMovies()
-            model.getGenres()?.let {
+            val moviesList = model.getPopularMoviesAsync()
+            model.getGenresAsync()?.let {
                 genres.addAll(it)
             }
 
@@ -123,11 +122,7 @@ class MoviesViewModel(private val model: MoviesModel) : ViewModel() {
         }
     }
 
-    private fun setData(function: () -> Unit) {
-        viewModelScope.launch {
-            launch(Dispatchers.Main) {
-                function()
-            }
-        }
+    private suspend fun setData(function: () -> Unit) = withContext(Dispatchers.Main) {
+        function()
     }
 }

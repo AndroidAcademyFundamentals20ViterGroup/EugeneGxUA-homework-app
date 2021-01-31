@@ -1,10 +1,11 @@
 package com.egaragul.androidfundametals.ui.movies.model.api
 
+import com.egaragul.androidfundametals.ui.movies.data.Genre
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDetailResponse(
+class MovieDetailResponse(
 	@SerialName("original_language")
 	val originalLanguage: String? = null,
 
@@ -64,18 +65,7 @@ data class MovieDetailResponse(
 
 	@SerialName("status")
 	val status: String? = null
-) {
-
-	@Serializable
-	data class Genre(
-
-		@SerialName("name")
-		val name: String? = null,
-
-		@SerialName("id")
-		val id: Long? = null
-	)
-}
+)
 
 
 

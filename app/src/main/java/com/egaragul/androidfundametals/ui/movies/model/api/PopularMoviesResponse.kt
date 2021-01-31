@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PopularMoviesResponse(
+class PopularMoviesResponse(
 	@SerialName("page")
 	val page: Long? = null,
 
@@ -16,52 +16,52 @@ data class PopularMoviesResponse(
 
 	@SerialName("total_results")
 	val totalResults: Int? = null
-) {
-    @Serializable
-    data class Movie(
+)
 
-		@SerialName("id")
-		val id: Int? = null,
+@Serializable
+class Movie(
 
-		@SerialName("adult")
-		val adult: Boolean? = null,
+	@SerialName("id")
+	val id: Int? = null,
 
-		@SerialName("overview")
-		val overview: String? = null,
+	@SerialName("adult")
+	val adult: Boolean? = null,
 
-		@SerialName("original_language")
-		val originalLanguage: String? = null,
+	@SerialName("overview")
+	val overview: String? = null,
 
-		@SerialName("original_title")
-		val originalTitle: String? = null,
+	@SerialName("original_language")
+	val originalLanguage: String? = null,
 
-		@SerialName("video")
-		val video: Boolean? = null,
+	@SerialName("original_title")
+	val originalTitle: String? = null,
 
-		@SerialName("title")
-		val title: String? = null,
+	@SerialName("video")
+	val video: Boolean? = null,
 
-		@SerialName("genre_ids")
-		val genreIds: List<Long?>? = null,
+	@SerialName("title")
+	val title: String? = null,
 
-		@SerialName("poster_path")
-		val posterPath: String? = null,
+	@SerialName("genre_ids")
+	val genreIds: List<Long?>? = null,
 
-		@SerialName("backdrop_path")
-		val backdropPath: String? = null,
+	@SerialName("poster_path")
+	val posterPath: String? = null,
 
-		@SerialName("release_date")
-		val releaseDate: String? = null,
+	@SerialName("backdrop_path")
+	val backdropPath: String? = null,
 
-		@SerialName("popularity")
-		val popularity: Double? = null,
+	@SerialName("release_date")
+	val releaseDate: String? = null,
 
-		@SerialName("vote_average")
-		val voteAverage: Double? = null,
+	@SerialName("popularity")
+	val popularity: Double? = null,
 
-		@SerialName("vote_count")
-		val voteCount: Int? = null
-	)
-}
+	@SerialName("vote_average")
+	val voteAverage: Double? = null,
+
+	@SerialName("vote_count")
+	val voteCount: Int? = null
+)
 
 

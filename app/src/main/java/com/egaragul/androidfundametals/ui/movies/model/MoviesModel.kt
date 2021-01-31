@@ -7,23 +7,23 @@ import kotlinx.coroutines.withContext
 
 class MoviesModel(private val movieDbService: TheMovieDbService) {
 
-    suspend fun getConfiguration() : Images? {
+    suspend fun getConfigurationAsync() : Images? {
         return movieDbService.getConfig().images
     }
 
-    suspend fun getPopularMovies() = withContext(Dispatchers.IO) {
+    suspend fun getPopularMoviesAsync() = withContext(Dispatchers.IO) {
         movieDbService.getPopularMovies().results
     }
 
-    suspend fun getGenres() = withContext(Dispatchers.IO) {
+    suspend fun getGenresAsync() = withContext(Dispatchers.IO) {
         movieDbService.getGenres().genres
     }
 
-    suspend fun getMovieDetails(movieId : Int) = withContext(Dispatchers.IO) {
+    suspend fun getMovieDetailsAsync(movieId : Int) = withContext(Dispatchers.IO) {
         movieDbService.getMovieDetails(movieId)
     }
 
-    suspend fun getMovieCredits(movieId: Int) = withContext(Dispatchers.IO) {
+    suspend fun getMovieCreditsAsync(movieId: Int) = withContext(Dispatchers.IO) {
         movieDbService.getMovieCredits(movieId).cast
     }
 }
