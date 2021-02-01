@@ -19,3 +19,15 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+# Change here com.yourcompany.yourpackage
+-keep,includedescriptorclasses class com.yourcompany.yourpackage.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.egaragul.androidfundametals.MainActivity** { # <-- change package name to your app's
+    *** Companion;
+}
+-keepclasseswithmembers class com.egaragul.androidfundametals** { # <-- change package name to your app's
+    kotlinx.serialization.KSerializer serializer(...);
+}

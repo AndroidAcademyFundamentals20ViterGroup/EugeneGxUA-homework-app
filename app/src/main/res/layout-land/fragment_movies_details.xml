@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/screen_bg"
-        tools:context=".MovieDetailsActivity">
+        tools:context=".ui.movies.details.FragmentMoviesDetails">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_start"
@@ -162,92 +162,21 @@
             app:layout_constraintTop_toBottomOf="@id/tv_storyline_description"
             tools:text="Cast" />
 
-        <ImageView
-            android:id="@+id/iv_cast_1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin_padding"
-            android:src="@mipmap/rdj"
-            app:layout_constraintEnd_toStartOf="@id/iv_cast_2"
-            app:layout_constraintStart_toStartOf="@id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_cast" />
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/default_margin_padding"
+            android:paddingEnd="@dimen/default_margin_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cast"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_actor" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_padding"
-            android:text="Robert Downey Jr."
-            android:textAppearance="@style/Cast"
-            app:layout_constraintEnd_toEndOf="@id/iv_cast_1"
-            app:layout_constraintStart_toStartOf="@id/iv_cast_1"
-            app:layout_constraintTop_toBottomOf="@id/iv_cast_1" />
-
-        <ImageView
-            android:id="@+id/iv_cast_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ce"
-            app:layout_constraintEnd_toStartOf="@id/iv_cast_3"
-            app:layout_constraintStart_toEndOf="@id/iv_cast_1"
-            app:layout_constraintTop_toTopOf="@id/iv_cast_1" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_padding"
-            android:text="Chris Evans"
-            android:textAppearance="@style/Cast"
-            app:layout_constraintEnd_toEndOf="@id/iv_cast_2"
-            app:layout_constraintStart_toStartOf="@id/iv_cast_2"
-            app:layout_constraintTop_toBottomOf="@id/iv_cast_2" />
-
-        <ImageView
-            android:id="@+id/iv_cast_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/mr"
-            app:layout_constraintEnd_toStartOf="@id/iv_cast_4"
-            app:layout_constraintStart_toEndOf="@id/iv_cast_2"
-            app:layout_constraintTop_toTopOf="@id/iv_cast_1" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_padding"
-            android:text="Mark Ruffalo"
-            android:textAppearance="@style/Cast"
-            app:layout_constraintEnd_toEndOf="@id/iv_cast_3"
-            app:layout_constraintStart_toStartOf="@id/iv_cast_3"
-            app:layout_constraintTop_toBottomOf="@id/iv_cast_3" />
-
-        <ImageView
-            android:id="@+id/iv_cast_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ch"
-            app:layout_constraintEnd_toStartOf="@id/guideline_end"
-            app:layout_constraintStart_toEndOf="@id/iv_cast_3"
-            app:layout_constraintTop_toTopOf="@id/iv_cast_1" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin_padding"
-            android:maxLines="2"
-            android:text="Chris\nHemsworth"
-            android:textAppearance="@style/Cast"
-            app:layout_constraintEnd_toEndOf="@id/iv_cast_4"
-            app:layout_constraintStart_toStartOf="@id/iv_cast_4"
-            app:layout_constraintTop_toBottomOf="@id/iv_cast_4" />
-
-        <!--    <androidx.recyclerview.widget.RecyclerView-->
-        <!--        android:id="@+id/rv_cast"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        app:layout_constraintTop_toBottomOf="@id/tv_cast"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        android:layout_marginTop="@dimen/small_margin_padding"-->
-        <!--        />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
